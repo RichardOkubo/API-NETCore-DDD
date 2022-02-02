@@ -28,7 +28,11 @@ namespace Api.Application.Controllers
             {
                 var result = await service.FindByLogin(userEntity);
 
-                return (result != null) ? Ok(result) : NotFound();
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+                return NotFound();
             }
             catch (ArgumentException e)
             {
