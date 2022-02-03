@@ -64,7 +64,7 @@ namespace Api.Service.Services
                     var handler = new JwtSecurityTokenHandler();
                     string token = CreateToken(identity, createDate, expiretionDate, handler);
 
-                    return SuccessObject(createDate, expiretionDate, token, user);
+                    return SuccessObject(createDate, expiretionDate, token, baseUser);
                 }
             }
 
@@ -97,7 +97,7 @@ namespace Api.Service.Services
         private object SuccessObject(DateTime createDate,
                                      DateTime expirationDate,
                                      string token,
-                                     LoginDto user)
+                                     UserEntity user)
         {
             return new
             {
@@ -106,6 +106,7 @@ namespace Api.Service.Services
                 expirad = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 acessToken = token,
                 userName = user.Email,
+                name = user.Name,
                 message = "Usuário logado com sucesso"
             };
         }
